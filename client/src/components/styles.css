@@ -1,0 +1,146 @@
+/* *{
+  margin: 0px;
+} */
+
+.regipage {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  font-size: calc(20px + 2vmin);
+  /* font-size: 2rem; */
+  font-weight: 500;
+
+  color: white;
+}
+
+.regipage input {
+  margin: 0.3rem;
+  padding: 0.5rem;
+  width: 50%;
+  height: 2.5rem;
+  background-color: #282c34;
+  border: 0px 5px;
+  border-color: red;
+  color: whitesmoke;
+  font-size: 1.4rem;
+  border-style: none none solid none;
+}
+
+.submit {
+  background-color: #282c34;
+  /* min-height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  font-size: calc(20px + 2vmin);
+  /* font-size: 2rem; */
+  font-weight: 500;
+
+  color: white;
+}
+
+.submit form {
+  width: 100%;
+}
+
+.submit input {
+  margin: 0.3rem;
+  padding: 0.5rem;
+  width: 50%;
+  height: 2.5rem;
+  background-color: #282c34;
+  border: 0px 5px;
+  border-color: red;
+  color: whitesmoke;
+  font-size: 1.4rem;
+  border-style: none none solid none;
+}
+
+.regipage form {
+  width: 100%;
+}
+
+.secretPage {
+  background-color: #282c34;
+
+  /* display: flex; */
+  flex-direction: column;
+  /* align-items: center; */
+  text-align: center;
+  /* justify-content: center; */
+  font-size: calc(20px + 2vmin);
+  /* font-size: 2rem; */
+
+  color: white;
+}
+
+.title1 {
+  margin-top: 0.5rem;
+  font-size: 3rem;
+  /* font-weight: 300; */
+
+}
+
+.subtitle {
+  margin-top: 1rem;
+  font-size: 3rem;
+  font-weight: 300;
+
+}
+
+.infoline{
+  font-size: 1.7rem;
+  opacity: 0.5;
+}
+
+/***** CARD ************/
+
+.card-container {
+background-color: #282c34;
+background-image: url("https://www.transparenttextures.com/patterns/black-linen.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  margin: 10px;
+}
+
+
+
+.card-container div {
+
+  /* height: 200px; */
+  /* width: 200px; */
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.card-container div p {
+  color: #ffffff;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.7rem;
+}
+
+.footer{
+  text-align: center;
+  background-color: #282c34;
+  color: whitesmoke;
+background-image: url("https://www.transparenttextures.com/patterns/black-linen.png");
+ font-family:'Times New Roman', Times, serif ;
+  font-size: 2rem;
+background-size: 10px 10px;
+
+}
+
+
+.footer p {
+  margin: 15px 0px 0px 0px ;
+  font-size: 1.3rem;
+}
