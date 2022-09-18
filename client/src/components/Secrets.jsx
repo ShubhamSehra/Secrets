@@ -55,7 +55,7 @@ const Secret = () => {
           welcome{" "}
           <p className="subtitle">
             to the 🌎 of secrets🔑
-            <p className="infoline">within 73 words</p>
+            <p className="infoline">within 120 words</p>
           </p>
         </span>
         <div>

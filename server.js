@@ -152,12 +152,41 @@ app.post("/api/login", (req, res) => {
   const loginEmail = req.body.email;
   const loginPassword = req.body.password;
 
+//   user.findOne({ email: loginEmail }, (error, foundUser) => {
+//     if (error) {
+//       return console.log(error);
+//       console.log("this is not found");
+//     } else {
+//       console.log("here");
+//       try {
+//         if (foundUser) {
+//           bcrypt.compare(
+//             loginPassword,
+//             foundUser.password,
+//             (error, response) => {
+//               if (response) {
+//                 req.session.user = foundUser;
+//                 const id = foundUser.id;
+//                 const token = jwt.sign({ id }, secret_key, {
+//                   expiresIn: 86400,
+//                 });
+
+//                 res.json({ auth: true, token: token, result: foundUser }); // we are sending all the info change and send id
+//               }
+//             }
+//           );
+//         }
+//       } catch (err) {
+//         res.send({ message: "User dosn't exist" });
+//       }
+//     }
+//   });
+// });
   user.findOne({ email: loginEmail }, (error, foundUser) => {
     if (error) {
-      console.log(error);
-    } else {
-      try {
-        if (foundUser) {
+      return console.log(error);
+      
+    } if (foundUser) {
           bcrypt.compare(
             loginPassword,
             foundUser.password,
@@ -173,11 +202,11 @@ app.post("/api/login", (req, res) => {
               }
             }
           );
+        } else {
+          res.send("not match")
         }
-      } catch (err) {
-        res.send({ message: "User dosn't exist" });
-      }
-    }
+    
+    
   });
 });
 

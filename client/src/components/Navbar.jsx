@@ -12,7 +12,7 @@ const Navbar = (props) =>{
 
     return(
         <div className="nav" >
-            <span>{props.username}</span>
+            <span style={{textTransform: "uppercase"}} >{props.username}</span>
 
             <button className="posi" onClick={logout}>
                 Logout

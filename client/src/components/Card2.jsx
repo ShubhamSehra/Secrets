@@ -35,9 +35,9 @@ function Card2(props) {
         <p>{props.secret}</p>
       </div>
       <div className="trash">
-        <span onClick={trashClicked}>
+        <button onClick={trashClicked}>
           <FontAwesomeIcon icon={faTrash} />
-        </span>
+        </button>
       </div>
     </div>
   );

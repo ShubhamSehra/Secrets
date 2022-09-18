@@ -44,7 +44,7 @@ function Submit() {
           type="text"
           name="secret"
           change={handleChange}
-          length= "73"
+          length= "120"
         />
         <button type="submit" className="fill">
           Share🔑

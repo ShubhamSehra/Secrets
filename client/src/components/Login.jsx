@@ -6,6 +6,7 @@ import axios from "axios";
 const Login = () => {
   const [user, setuser] = useState({});
   const [userId, setUserId] = useState();
+  const [auth, setAuth ] = useState(false);
   // const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -14,9 +15,9 @@ const Login = () => {
     setuser({ ...user, [name]: value });
   };
 
-  const google = () => {
-    window.open("http://localhost:3002/auth/google", "_self");
-  };
+  // const google = () => {
+  //   window.open("http://localhost:3002/auth/google", "_self");
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,18 +34,26 @@ const Login = () => {
           }
         )
         .then((response) => {
-          if (response.data) {
-            console.log(response.data);
-            const id = response.data.result._id;
-            localStorage.setItem("user", id);
-            setUserId(id);
-            navigate(`/secret/${id}`);
-          } else {
-            console.log("no respo");
+          try {
+            
+            if (response.data) {
+              console.log(response.data);
+              const id = response.data.result._id;
+              localStorage.setItem("user", id);
+              setUserId(id);
+              navigate(`/secret/${id}`);
+            } else {
+              console.log("no respo");
+            }
+          } catch (error) {
+            console.log(error);
+            setAuth(true)
+            console.log("uppr");
           }
         });
     } catch (error) {
-      console.log(error);
+      setAuth(true)
+      console.log("error in d end");
     }
   };
 
@@ -81,11 +90,12 @@ const Login = () => {
         <button type="submit" className="fill">
           login
         </button>
+       {auth ? <h4 className="errorlogin"> user does not exist ❌ </h4> : null}
       </form>
 
-      <button type="submit" className="fill" onClick={google}>
+      {/* <button type="submit" className="fill" onClick={google}>
         google
-      </button>
+      </button> */}
     </div>
   );
 };
