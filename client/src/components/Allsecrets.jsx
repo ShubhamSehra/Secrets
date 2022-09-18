@@ -6,7 +6,6 @@ function Allsecrets() {
   const [alluser, setallUser] = useState({});
 
   let hvSecrets = [];
-
   const getallUsers = () => {
     axios
       .get("/userdata")
@@ -18,25 +17,25 @@ function Allsecrets() {
         console.log(error);
       });
   };
+  
+  
 
-  for (let i = 0; i < alluser.length; i++) {
-    if (alluser[i].secret ) {
-      hvSecrets.push(alluser[i]);
-    }
+
+  for (let i = 0; i < alluser.length ; i++) {
+    for(let j = 0; j < alluser[i].secret.length; j++ )
+    
+      hvSecrets.push(alluser[i].secret[j]);
+    
   }
-
+ 
   useEffect(getallUsers, []);
 
-  function createCard(props) {
-    return <Card secret={props.secret} />;
-  }
 
-
-
-  
   return (
     <div>
-      {hvSecrets.map(createCard)}
+      {hvSecrets.map((card,i)=>{
+        return <Card secret={card} />
+      })}
     </div>
   );
 }

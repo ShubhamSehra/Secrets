@@ -19,49 +19,41 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
-   try {
-    
-     await axios
-       .post(
-         "/api/login",
-         {
-           email: user.email,
-           password: user.password,
-         },
-         {
-           method: "POST",
-         }
-       )
-       .then((response) => {
-         if (response.data) {
-           const id = response.data.result._id;
-           localStorage.setItem("user", id );
-           setUserId(id);
-           navigate(`/secret/${id}`)
-  
-         } else {
-           console.log("no respo");
-          
-         }
-       })
-   } catch (error) {
-    console.log(error);
-   }
+    try {
+      await axios
+        .post(
+          "/api/login",
+          {
+            email: user.email,
+            password: user.password,
+          },
+          {
+            method: "POST",
+          }
+        )
+        .then((response) => {
+          if (response.data) {
+            console.log(response.data);
+            const id = response.data.result._id;
+            localStorage.setItem("user", id);
+            setUserId(id);
+            navigate(`/secret/${id}`);
+          } else {
+            console.log("no respo");
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  console.log(userId);
-  // useEffect(handleSubmit, [userId])
-
-  // if (loading) return <div />;
-
-  useEffect(()=>{
+  useEffect(() => {
     if (localStorage.getItem("user")) {
       console.log(localStorage.getItem("user"));
-      return navigate(`/secret/${localStorage.getItem("user")}`)
-  } 
-  },[navigate])
+      return navigate(`/secret/${localStorage.getItem("user")}`);
+    }
+  }, [navigate]);
 
   return (
     <div className="regipage">

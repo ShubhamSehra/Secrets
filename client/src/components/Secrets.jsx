@@ -3,14 +3,28 @@ import Navbar from "./Navbar";
 import { useNavigate, useParams } from "react-router-dom";
 import Submit from "./Submit";
 import axios from "axios";
-// import Card from "./Card";
 import Allsecrets from "./Allsecrets";
 import Footer from "./Footer";
+import Mysecrets from "./Mysecrets";
 
 const Secret = () => {
   const { userId } = useParams();
   const [user, setUser] = useState({});
+  const [allshow, setAllShow] = useState(true);
+  const [myshow, setMyShow] = useState(false);
   const navigate = useNavigate();
+
+  const allsecrets = () => {
+    setAllShow(true);
+    setMyShow(false);
+  };
+
+  const mysecrets = () => {
+    setMyShow(true);
+    setAllShow(false);
+  };
+  // const id = localStorage.getItem("user")
+
   const getUser = () => {
     axios
       .get("/userdata")
@@ -31,7 +45,7 @@ const Secret = () => {
   if (!localStorage.getItem("user")) {
     return navigate("/login");
   }
-  // console.log(user);
+
   return (
     <div>
       <Navbar username={user.username} />
@@ -48,14 +62,17 @@ const Secret = () => {
           <Submit />
         </div>
         <div style={{ margin: "20px 0px" }}>
-          <span style={{ backgroundColor: "black", display: "block" }}>
+          <button className="special-btn" onClick={allsecrets}>
             All Secrets
-          </span>
+          </button>
+
+          <button className="special-btn" onClick={mysecrets}>
+            My Secrets
+          </button>
         </div>
 
-        <div>
-          <Allsecrets />
-        </div>
+        <div>{allshow ? <Allsecrets /> : null}</div>
+        <div>{myshow ? <Mysecrets /> : null}</div>
       </div>
       <div>
         <Footer />

@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 function Card(props) {
   return (
     <>
@@ -10,6 +9,7 @@ function Card(props) {
 
       <p>{props.secret}</p>
       </div>
+      
       </div>
 
     </>

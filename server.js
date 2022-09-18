@@ -62,7 +62,7 @@ const userSchema = new mongoose.Schema({
   email: String,
   password: String,
   googleId: String,
-  secret: String,
+  secret: [String],
 });
 userSchema.plugin(findOrCreate);
 
@@ -98,27 +98,24 @@ passport.use(
           return cb(err, user);
         }
       );
-     
     }
   )
 );
-
-
 
 app.get("/", (req, res) => {
   res.send("welcome to backend");
 });
 
-app.post("/api/postSecret", (req,res)=>{
+app.post("/api/postSecret", (req, res) => {
   const secret = req.body.secret;
   const userId = req.body.id;
-  user.findById(userId, (err, foundUser)=>{
-    foundUser.secret =secret;
-    foundUser.save(()=>{
-      res.send("user secret Saved")
-    })
-  })
-})
+  user.findById(userId, (err, foundUser) => {
+    // const addsec = foundUser.secret;
+    foundUser.secret.push(secret);
+    foundUser.save();
+    res.send("yo");
+  });
+});
 
 const verifyJWT = (req, res, next) => {
   const token = req.headers[x - access - token];
@@ -136,7 +133,17 @@ const verifyJWT = (req, res, next) => {
     });
   }
 };
-
+app.post("/api/delete", async (req, res) => {
+  const secretz = req.body.secretIndex;
+  const id = req.body.id;
+  // console.log(secretz, id);
+  try {
+    await user.updateOne({ _id: id }, { $pull: { secret: secretz } });
+    res.send("profile deleted");
+  } catch (error) {
+    console.log(error);
+  }
+});
 app.get("/api/isUserAuth", verifyJWT, (req, res) => {
   res.send("This user is Authenticated");
 });
@@ -147,7 +154,6 @@ app.post("/api/login", (req, res) => {
 
   user.findOne({ email: loginEmail }, (error, foundUser) => {
     if (error) {
-    
       console.log(error);
     } else {
       try {
@@ -162,7 +168,7 @@ app.post("/api/login", (req, res) => {
                 const token = jwt.sign({ id }, secret_key, {
                   expiresIn: 86400,
                 });
-                console.log(id);
+
                 res.json({ auth: true, token: token, result: foundUser }); // we are sending all the info change and send id
               }
             }
