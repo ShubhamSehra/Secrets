@@ -173,10 +173,18 @@
 
 }
 
+.already{
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+.already strong{
+  text-decoration: underline;
+  color: whitesmoke;
+}
+
 .trash button:hover {
   font-size: 2rem;
   color: rgb(195, 36, 36);
-
 }
 
 .errorlogin{

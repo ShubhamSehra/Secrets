@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Input from "./Input";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
   const [user, setuser] = useState({});
-  const [userId, setUserId] = useState();
-  const [auth, setAuth ] = useState(false);
-  // const [loading, setLoading] = useState(false);
+
+  const [auth, setAuth] = useState(false);
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -35,24 +35,23 @@ const Login = () => {
         )
         .then((response) => {
           try {
-            
             if (response.data) {
               console.log(response.data);
               const id = response.data.result._id;
               localStorage.setItem("user", id);
-              setUserId(id);
+
               navigate(`/secret/${id}`);
             } else {
               console.log("no respo");
             }
           } catch (error) {
             console.log(error);
-            setAuth(true)
+            setAuth(true);
             console.log("uppr");
           }
         });
     } catch (error) {
-      setAuth(true)
+      setAuth(true);
       console.log("error in d end");
     }
   };
@@ -66,10 +65,7 @@ const Login = () => {
 
   return (
     <div className="regipage">
-      <span>
-        {" "}
-        <u>Login Here</u>
-      </span>
+      <span> Login Here 🚀</span>
       <br />
       <form onSubmit={handleSubmit}>
         <Input
@@ -90,7 +86,13 @@ const Login = () => {
         <button type="submit" className="fill">
           login
         </button>
-       {auth ? <h4 className="errorlogin"> user does not exist ❌ </h4> : null}
+        <div className="already ">
+          not registered yet?...{" "}
+          <Link to={"/register"}>
+            <strong className="already-sub">Register</strong>
+          </Link>{" "}
+        </div>
+        {auth ? <h4 className="errorlogin"> user does not exist ❌ </h4> : null}
       </form>
 
       {/* <button type="submit" className="fill" onClick={google}>

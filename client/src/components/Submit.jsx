@@ -38,7 +38,7 @@ function Submit() {
       
     
     <div>
-      <form className="submit" onSubmit={handleSubmit}>
+      <form className="submit" onSubmit={handleSubmit} autoComplete="off" >
         <Input
           placeholder={"What's your secret?"}
           type="text"

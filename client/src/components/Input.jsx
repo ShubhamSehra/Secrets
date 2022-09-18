@@ -8,6 +8,7 @@ const Input = (props) =>{
         name = {props.name}
         onChange = {props.change}
         maxLength = {props.length}
+        autocomplete="false" 
         required
          />
     )

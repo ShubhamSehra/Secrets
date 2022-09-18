@@ -31,10 +31,10 @@ function Home() {
         />
         <div className="flex">
           <Link type="button" to={"/register"} className="fill">
-            Register
+            Register 
           </Link>
           <Link type="button" to={"/login"} className="fill">
-            login
+            login 
           </Link>
         </div>
       </header>

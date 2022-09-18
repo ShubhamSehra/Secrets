@@ -2,23 +2,22 @@ import React, { useState } from "react";
 import "./styles.css";
 import Input from "./Input";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [info, setInfo] = useState({});
-  
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInfo({ ...info, [name]: value });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-   await axios
+    await axios
       .post(
         "/api/user",
         {
@@ -39,7 +38,7 @@ const Register = () => {
     <div className="regipage">
       <span>
         {" "}
-        <u>Register Yourself</u>
+        Register Yourself 📃
       </span>
       <br />
       <form onSubmit={handleSubmit}>
@@ -68,6 +67,7 @@ const Register = () => {
         <button type="submit" className="fill">
           Register
         </button>
+        <div className="already " >already registered?... <Link to={'/login'}><strong className="already-sub" >login</strong></Link> </div>
       </form>
     </div>
   );
