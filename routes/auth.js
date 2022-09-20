@@ -4,7 +4,7 @@ const router = require('express').Router();
 const cors = require("cors");
 const passport = require('passport');
 const jwt = require("jsonwebtoken");
-const secret_key = process.env.SECRET_KEY;
+// const secret_key = process.env.SECRET_KEY;
 
 router.use(
     cors()
@@ -31,22 +31,22 @@ router.get("/login/failed", (req, res)=>{
         message: "login failed",
     })
 })
-router.get ("/google", passport.authenticate("google",{scope: ["profile"]}));
+// router.get ("/google", passport.authenticate("google",{scope: ["profile"]}));
 
 
-router.get('/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  function(req, res) {
-                console.log(req.session.user._id);
-                const foundUser =  req.session.user;
-                const id = foundUser.id;
-                const token = jwt.sign({ id }, secret_key, {
-                  expiresIn: 86400,
-                });
-                // console.log(id);
-                res.json({ auth: true, token: token, result: foundUser })
+// router.get('/google/callback', 
+//   passport.authenticate('google', { failureRedirect: '/login' }),
+//   function(req, res) {
+//                 console.log(req.session.user._id);
+//                 const foundUser =  req.session.user;
+//                 const id = foundUser.id;
+//                 const token = jwt.sign({ id }, secret_key, {
+//                   expiresIn: 86400,
+//                 });
+//                 // console.log(id);
+//                 res.json({ auth: true, token: token, result: foundUser })
                 
-  });
+//   });
 // router.get("/google/callback", passport.authenticate("google", {
 //     successRedirect: `http://localhost:3000/secret/631e482a7a7b627316baf2d8`,
 //     failureRedirect: "/login/failed",
