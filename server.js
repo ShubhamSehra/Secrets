@@ -10,8 +10,8 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const saltRounds = 8;
 const path = require("path");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const LocalStrategy = require("passport-local");
+// const GoogleStrategy = require("passport-google-oauth20").Strategy;
+// const LocalStrategy = require("passport-local");
 const findOrCreate = require("mongoose-findorcreate");
 const PORT = process.env.PORT || 3002;
 const app = express();
@@ -207,6 +207,6 @@ app.get("*", (req, res) => {
 if (process.env.NODE_ENV === "production") {
 }
 
-app.listen(PORT, () => {
+app.listen(PORT, (req, res) => {
   console.log(`server ${PORT} running`);
 });
