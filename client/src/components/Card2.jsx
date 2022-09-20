@@ -8,7 +8,7 @@ function Card2(props) {
   const navigate = useNavigate();
 
   const trashClicked = () => {
-    return prompt("No.. you can't delete, It's a prank bro 😂😂 ")
+    return alert("No.. you can't delete, It's a prank bro 😂😂 ")
   }
 
   // const trashClicked = () => {
