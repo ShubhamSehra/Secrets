@@ -3,8 +3,8 @@ import React from "react";
 const Navbar = (props) =>{
 
     const logout = () => {
-        localStorage.clear().then(()=> console.log("problem in logout"));
-        // window.open("/auth/logout", "_self")
+        localStorage.clear();
+        window.open("/auth/logout", "_self")
 
     }
     
