@@ -8,26 +8,30 @@ function Card2(props) {
   const navigate = useNavigate();
 
   const trashClicked = () => {
-    try {
-      axios
-        .post(
-          "/api/delete",
-          {
-            secretIndex: props.secret,
-            id: userId,
-          },
-          {
-            method: "POST",
-          }
-        )
-        .then(() => navigate(0))
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    return prompt("No.. you can't delete, It's a prank bro 😂😂 ")
+  }
+
+  // const trashClicked = () => {
+  //   try {
+  //     axios
+  //       .post(
+  //         "/api/delete",
+  //         {
+  //           secretIndex: props.secret,
+  //           id: userId,
+  //         },
+  //         {
+  //           method: "POST",
+  //         }
+  //       )
+  //       .then(() => navigate(0))
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <div className="card-container">
