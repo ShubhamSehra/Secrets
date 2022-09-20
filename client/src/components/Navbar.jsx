@@ -4,7 +4,7 @@ const Navbar = (props) =>{
 
     const logout = () => {
         localStorage.clear();
-        window.open("http://localhost:3002/auth/logout", "_self")
+        window.open("/auth/logout", "_self")
 
     }
     

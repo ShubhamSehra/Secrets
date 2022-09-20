@@ -6,9 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
+    "client": "cd client && npm start",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "nodemon": "nodemon server.js"
   },
-  "author": "",
+  "author": "Shubham Sehra",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
@@ -24,7 +26,6 @@
     "mongoose": "^6.5.5",
     "mongoose-findorcreate": "^3.0.0",
     "passport": "^0.5.3",
-    "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0"
   }
 }

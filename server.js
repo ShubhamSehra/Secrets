@@ -9,10 +9,11 @@ const authRoute = require("./routes/auth.js");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const saltRounds = 8;
+const path = require("path");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const LocalStrategy = require("passport-local");
 const findOrCreate = require("mongoose-findorcreate");
-const port = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3002;
 const app = express();
 const jwt = require("jsonwebtoken");
 const MongoStore = require("connect-mongo");
@@ -41,13 +42,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    methods: "GET, POST, PUT, DELETE",
-    credentials: true,
-  })
-);
+app.use(cors());
 
 app.use("/auth", authRoute);
 
@@ -78,33 +73,31 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:3002/auth/google/callback", //cb to backend
-    },
-    function (accessToken, refreshToken, profile, cb) {
-      const id = profile.id;
-      console.log(id);
-      user.findOrCreate(
-        {
-          googleId: profile.id,
-          username: profile.displayName,
-          email: profile.email,
-        },
-        function (err, user) {
-          return cb(err, user);
-        }
-      );
-    }
-  )
-);
+// passport.use(
+//   new GoogleStrategy(
+//     {
+//       clientID: process.env.GOOGLE_CLIENT_ID,
+//       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+//       callbackURL: "http://localhost:3002/auth/google/callback", //cb to backend
+//     },
+//     function (accessToken, refreshToken, profile, cb) {
+//       const id = profile.id;
+//       console.log(id);
+//       user.findOrCreate(
+//         {
+//           googleId: profile.id,
+//           username: profile.displayName,
+//           email: profile.email,
+//         },
+//         function (err, user) {
+//           return cb(err, user);
+//         }
+//       );
+//     }
+//   )
+// );
 
-app.get("/", (req, res) => {
-  res.send("welcome to backend");
-});
+
 
 app.post("/api/postSecret", (req, res) => {
   const secret = req.body.secret;
@@ -133,10 +126,10 @@ const verifyJWT = (req, res, next) => {
     });
   }
 };
+app.use(express.static(path.resolve(__dirname, "./client/build")));
 app.post("/api/delete", async (req, res) => {
   const secretz = req.body.secretIndex;
   const id = req.body.id;
-  // console.log(secretz, id);
   try {
     await user.updateOne({ _id: id }, { $pull: { secret: secretz } });
     res.send("profile deleted");
@@ -152,36 +145,7 @@ app.post("/api/login", (req, res) => {
   const loginEmail = req.body.email;
   const loginPassword = req.body.password;
 
-//   user.findOne({ email: loginEmail }, (error, foundUser) => {
-//     if (error) {
-//       return console.log(error);
-//       console.log("this is not found");
-//     } else {
-//       console.log("here");
-//       try {
-//         if (foundUser) {
-//           bcrypt.compare(
-//             loginPassword,
-//             foundUser.password,
-//             (error, response) => {
-//               if (response) {
-//                 req.session.user = foundUser;
-//                 const id = foundUser.id;
-//                 const token = jwt.sign({ id }, secret_key, {
-//                   expiresIn: 86400,
-//                 });
 
-//                 res.json({ auth: true, token: token, result: foundUser }); // we are sending all the info change and send id
-//               }
-//             }
-//           );
-//         }
-//       } catch (err) {
-//         res.send({ message: "User dosn't exist" });
-//       }
-//     }
-//   });
-// });
   user.findOne({ email: loginEmail }, (error, foundUser) => {
     if (error) {
       return console.log(error);
@@ -237,6 +201,12 @@ app.post("/api/user", (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`server ${port} running`);
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+});
+if (process.env.NODE_ENV === "production") {
+}
+
+app.listen(PORT, () => {
+  console.log(`server ${PORT} running`);
 });

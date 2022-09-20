@@ -6,13 +6,8 @@ const passport = require('passport');
 const jwt = require("jsonwebtoken");
 const secret_key = process.env.SECRET_KEY;
 
-
 router.use(
-    cors({
-      origin: "http://localhost:3000",
-      methods: "GET, POST, PUT, DELETE",
-      credentials: true,
-    })
+    cors()
   );
 
 router.get("/login/success", (req, res)=>{
@@ -61,7 +56,7 @@ router.get('/google/callback',
 
 router.get("/logout", (req, res)=>{
     req.logout();
-    res.redirect(process.env.CLIENT_URL);
+    res.redirect("/");
 })
 
 module.exports = router
