@@ -7,31 +7,31 @@ function Card2(props) {
   const { userId } = useParams();
   const navigate = useNavigate();
 
-  const trashClicked = () => {
-    return alert("No.. you can't delete, It's a prank bro 😂😂 ")
-  }
-
   // const trashClicked = () => {
-  //   try {
-  //     axios
-  //       .post(
-  //         "/api/delete",
-  //         {
-  //           secretIndex: props.secret,
-  //           id: userId,
-  //         },
-  //         {
-  //           method: "POST",
-  //         }
-  //       )
-  //       .then(() => navigate(0))
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  //   return alert("No.. you can't delete, It's a prank bro 😂😂 ")
+  // }
+
+  const trashClicked = () => {
+    try {
+      axios
+        .post(
+          "/api/delete",
+          {
+            secretIndex: props.secret,
+            id: userId,
+          },
+          {
+            method: "POST",
+          }
+        )
+        .then(() => navigate(0))
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="card-container">
