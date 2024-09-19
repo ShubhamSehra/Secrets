@@ -141,6 +141,8 @@ app.get("/api/isUserAuth", verifyJWT, (req, res) => {
   res.send("This user is Authenticated");
 });
 
+//login password compare 
+
 app.post("/api/login", (req, res) => {
   const loginEmail = req.body.email;
   const loginPassword = req.body.password;
@@ -177,7 +179,7 @@ app.post("/api/login", (req, res) => {
 app.get("/userdata", (req, res) => {
   user.find().then((foundUser) => res.json(foundUser));
 });
-
+// create a new user and save hash password
 app.post("/api/user", (req, res) => {
   bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
     try {
