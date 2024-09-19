@@ -16,7 +16,7 @@ function Home() {
     <div className="App">
       <header className="App-header">
         <FontAwesomeIcon icon={faKey} size="5x" />
-        <span className="mainTitle">Share Secrets</span>
+        <span className="mainTitle">Wishper Wall</span>
         <span className="subTitle">
           It's time to share your secrets, anonymously!
         </span>
