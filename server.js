@@ -59,7 +59,7 @@ const userSchema = new mongoose.Schema({
   googleId: String,
   secret: [String],
 });
-userSchema.plugin(findOrCreate);
+userSchema.plugin(findOrCreate); 
 
 const user = new mongoose.model("user", userSchema);
 
